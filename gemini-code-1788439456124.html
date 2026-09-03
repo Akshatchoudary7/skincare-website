@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clairo Skincare | Not Your Skin Twin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #FBF9F5;
+            color: #2D3729;
+            overflow-x: hidden;
+        }
+        h1, h2, h3, .serif-font {
+            font-family: 'Cormorant Garamond', serif;
+        }
+        .hero-bg {
+            background: linear-gradient(rgba(38, 48, 35, 0.5), rgba(24, 32, 21, 0.72)), url('./image.png') center/cover no-repeat;
+            background-attachment: fixed;
+        }
+        .page-section {
+            display: none;
+        }
+        .page-section.active {
+            display: block;
+        }
+        .nav-link.active {
+            border-bottom: 2px solid #3B4D35;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-[#3B4D35] selection:text-white">
+
+    <!-- HEADER / NAVIGATION -->
+    <header class="sticky top-0 z-50 bg-[#FBF9F5]/90 backdrop-blur-md border-b border-[#E6E2D8]">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <div class="flex items-center space-x-2 cursor-pointer" onclick="switchPage('home')">
+                <span class="serif-font text-3xl font-bold tracking-wider text-[#2D3729]">Clairo</span>
+                <span class="text-xs uppercase tracking-widest text-[#5A6B54] font-medium border-l border-[#5A6B54] pl-2">Skincare</span>
+            </div>
+            
+            <nav class="hidden md:flex items-center space-x-8 text-sm uppercase tracking-widest font-medium text-[#2D3729]">
+                <button onclick="switchPage('home')" id="nav-home" class="nav-link active pb-1 transition-all cursor-pointer">Home</button>
+                <button onclick="switchPage('products')" id="nav-products" class="nav-link pb-1 transition-all cursor-pointer">Products</button>
+                <button onclick="switchPage('community')" id="nav-community" class="nav-link pb-1 transition-all cursor-pointer">Community</button>
+            </nav>
+
+            <div class="flex items-center space-x-4">
+                <button onclick="switchPage('products')" class="bg-[#3B4D35] text-white px-5 py-2.5 rounded-full text-xs uppercase tracking-widest hover:bg-[#2D3729] transition-all shadow-sm">
+                    Take Skin Quiz
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT CONTAINER -->
+    <main class="flex-grow">
+
+        <!-- 1. HOME PAGE -->
+        <section id="page-home" class="page-section active">
+            <div class="hero-bg min-h-[calc(100vh-5rem)] flex items-center justify-center text-center px-4 relative">
+                <div class="max-w-3xl mx-auto text-white space-y-6">
+                    <span class="inline-block uppercase tracking-[0.3em] text-xs bg-white/20 backdrop-blur-md px-4 py-1.5 rounded-full font-medium border border-white/30">
+                        #NotYourSkinTwin
+                    </span>
+                    <h1 class="serif-font text-5xl md:text-7xl font-bold tracking-wide leading-tight">
+                        Your skin isn't generic.
+                    </h1>
+                    <p class="text-lg md:text-xl font-light text-[#F3F0E6] max-w-xl mx-auto">
+                        Treat. Heal. Glow Naturally. Personalised skincare subscription factoring in city-specific water hardness and humidity.
+                    </p>
+                    <div class="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
+                        <button onclick="switchPage('products')" class="w-full sm:w-auto bg-[#FBF9F5] text-[#2D3729] px-8 py-3.5 rounded-full text-sm uppercase tracking-widest font-semibold hover:bg-white transition-all shadow-lg">
+                            Explore Products & Pricing
+                        </button>
+                        <button onclick="switchPage('community')" class="w-full sm:w-auto border border-white text-white px-8 py-3.5 rounded-full text-sm uppercase tracking-widest font-semibold hover:bg-white/10 transition-all">
+                            Read Our Manifesto
+                        </button>
+                    </div>
+                </div>
+
+                <div class="absolute bottom-6 left-0 right-0 text-center text-white/70 text-xs tracking-widest uppercase">
+                    Scroll down or navigate to discover your custom routine
+                </div>
+            </div>
+
+            <!-- Brand Highlights Strip -->
+            <div class="bg-[#F3F0E6] py-12 px-6 border-y border-[#E6E2D8]">
+                <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                    <div class="space-y-2">
+                        <h3 class="serif-font text-2xl font-bold text-[#2D3729]">No Harsh Acids</h3>
+                        <p class="text-sm text-[#5A6B54]">Carefully formulated pure ingredients designed for delicate balancing.</p>
+                    </div>
+                    <div class="space-y-2">
+                        <h3 class="serif-font text-2xl font-bold text-[#2D3729]">City-Adapted Routines</h3>
+                        <p class="text-sm text-[#5A6B54]">Adjusted monthly based on local humidity and water mineral levels.</p>
+                    </div>
+                    <div class="space-y-2">
+                        <h3 class="serif-font text-2xl font-bold text-[#2D3729]">Monthly Refills</h3>
+                        <p class="text-sm text-[#5A6B54]">Subscriptions that evolve as your skin changes across seasons.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Home Page Featured Showcase -->
+            <div class="py-20 px-6 max-w-7xl mx-auto">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                    <div class="lg:col-span-6 space-y-6">
+                        <span class="text-xs uppercase tracking-[0.25em] text-[#5A6B54] font-semibold">The Complete System</span>
+                        <h2 class="serif-font text-4xl md:text-5xl font-bold text-[#2D3729] leading-tight">Formulated to Restore Harmony to Stressed Skin</h2>
+                        <p class="text-[#5A6B54] leading-relaxed">
+                            Every formula in the Clairo system works symbiotically to cleanse, balance, nourish, renew, and shield your skin without harsh additives or stripping agents.
+                        </p>
+                        <div class="grid grid-cols-2 gap-4 pt-2">
+                            <div class="bg-[#F3F0E6] p-4 rounded-xl border border-[#E6E2D8]">
+                                <span class="block serif-font text-2xl font-bold text-[#2D3729]">5 Core Steps</span>
+                                <span class="text-xs text-[#5A6B54]">Daily personalized routine</span>
+                            </div>
+                            <div class="bg-[#F3F0E6] p-4 rounded-xl border border-[#E6E2D8]">
+                                <span class="block serif-font text-2xl font-bold text-[#2D3729]">100% Clean</span>
+                                <span class="text-xs text-[#5A6B54]">Zero parabens or sulfates</span>
+                            </div>
+                        </div>
+                        <div class="pt-4">
+                            <button onclick="switchPage('products')" class="bg-[#3B4D35] text-white px-8 py-3.5 rounded-full text-sm uppercase tracking-widest font-semibold hover:bg-[#2D3729] transition-all shadow-md">
+                                Shop The Range
+                            </button>
+                        </div>
+                    </div>
+                    <div class="lg:col-span-6">
+                        <div class="relative rounded-3xl overflow-hidden shadow-2xl border border-[#E6E2D8] group">
+                            <img src="./image.png" alt="Clairo Skincare Complete Range" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105">
+                            <div class="absolute inset-0 bg-gradient-to-t from-[#2D3729]/40 via-transparent to-transparent"></div>
+                            <div class="absolute bottom-6 left-6 right-6 text-white flex items-center justify-between">
+                                <span class="serif-font text-xl font-bold tracking-wider">The Clairo Signature Line</span>
+                                <span class="text-xs uppercase tracking-widest bg-white/20 backdrop-blur-md px-3 py-1 rounded-full border border-white/30">5 Products</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. PRODUCTS LANDING PAGE -->
+        <section id="page-products" class="page-section py-16 px-6 max-w-7xl mx-auto">
+            <div class="text-center max-w-2xl mx-auto mb-16 space-y-4">
+                <span class="text-xs uppercase tracking-[0.2em] text-[#5A6B54] font-semibold">The Clairo Range</span>
+                <h2 class="serif-font text-4xl md:text-5xl font-bold text-[#2D3729]">Customised Essentials for Your Skin</h2>
+                <p class="text-sm text-[#6B7864]">Based directly on our signature line. Clean, natural, and built to treat and heal.</p>
+            </div>
+
+            <!-- Product Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+                
+                <!-- Product 1 -->
+                <div class="bg-white rounded-2xl p-6 border border-[#E6E2D8] shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between group">
+                    <div>
+                        <div class="bg-[#F3F0E6] rounded-xl overflow-hidden mb-6 h-72 flex items-center justify-center relative">
+                            <img src="./product-facewash.jpg" alt="Calm & Cleanse Gentle Face Wash" class="w-full h-full object-cover rounded-xl transition-transform duration-500 ease-out group-hover:scale-105">
+                        </div>
+                        <span class="text-xs uppercase tracking-widest text-[#5A6B54] font-semibold">100 ml</span>
+                        <h3 class="serif-font text-2xl font-bold text-[#2D3729] mt-1">Calm & Cleanse</h3>
+                        <p class="text-xs uppercase tracking-wider text-[#6B7864] mb-3">Gentle Face Wash</p>
+                        <p class="text-sm text-[#5A6B54] mb-4">Cleanses impurities without stripping natural moisture barrier.</p>
+                    </div>
+                    <div class="flex items-center justify-between pt-4 border-t border-[#E6E2D8]">
+                        <span class="serif-font text-2xl font-bold text-[#2D3729]">₹499</span>
+                        <button onclick="addToCart('Calm & Cleanse Face Wash', 499)" class="bg-[#3B4D35] text-white px-4 py-2 rounded-full text-xs uppercase tracking-widest hover:bg-[#2D3729] transition-all cursor-pointer">Add to Cart</button>
+                    </div>
+                </div>
+
+                <!-- Product 2 -->
+                <div class="bg-white rounded-2xl p-6 border border-[#E6E2D8] shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between group">
+                    <div>
+                        <div class="bg-[#F3F0E6] rounded-xl overflow-hidden mb-6 h-72 flex items-center justify-center relative">
+                            <img src="./product-toner.jpg" alt="Balance & Soothe Toner" class="w-full h-full object-cover rounded-xl transition-transform duration-500 ease-out group-hover:scale-105">
+                        </div>
+                        <span class="text-xs uppercase tracking-widest text-[#5A6B54] font-semibold">100 ml</span>
+                        <h3 class="serif-font text-2xl font-bold text-[#2D3729] mt-1">Balance & Soothe</h3>
+                        <p class="text-xs uppercase tracking-wider text-[#6B7864] mb-3">Toner</p>
+                        <p class="text-sm text-[#5A6B54] mb-4">Restores skin pH levels and tightens pores naturally.</p>
+                    </div>
+                    <div class="flex items-center justify-between pt-4 border-t border-[#E6E2D8]">
+                        <span class="serif-font text-2xl font-bold text-[#2D3729]">₹649</span>
+                        <button onclick="addToCart('Balance & Soothe Toner', 649)" class="bg-[#3B4D35] text-white px-4 py-2 rounded-full text-xs uppercase tracking-widest hover:bg-[#2D3729] transition-all cursor-pointer">Add to Cart</button>
+                    </div>
+                </div>
+
+                <!-- Product 3 -->
+                <div class="bg-white rounded-2xl p-6 border border-[#E6E2D8] shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between group">
+                    <div>
+                        <div class="bg-[#F3F0E6] rounded-xl overflow-hidden mb-6 h-72 flex items-center justify-center relative">
+                            <img src="./product-moisturizer.jpg" alt="Nourish & Repair Gel Moisturizer" class="w-full h-full object-cover rounded-xl transition-transform duration-500 ease-out group-hover:scale-105">
+                        </div>
+                        <span class="text-xs uppercase tracking-widest text-[#5A6B54] font-semibold">50 g</span>
+                        <h3 class="serif-font text-2xl font-bold text-[#2D3729] mt-1">Nourish & Repair</h3>
+                        <p class="text-xs uppercase tracking-wider text-[#6B7864] mb-3">Gel Moisturizer</p>
+                        <p class="text-sm text-[#5A6B54] mb-4">Lightweight hydration customized for your city climate.</p>
+                    </div>
+                    <div class="flex items-center justify-between pt-4 border-t border-[#E6E2D8]">
+                        <span class="serif-font text-2xl font-bold text-[#2D3729]">₹799</span>
+                        <button onclick="addToCart('Nourish & Repair Gel Moisturizer', 799)" class="bg-[#3B4D35] text-white px-4 py-2 rounded-full text-xs uppercase tracking-widest hover:bg-[#2D3729] transition-all cursor-pointer">Add to Cart</button>
+                    </div>
+                </div>
+
+                <!-- Product 4 -->
+                <div class="bg-white rounded-2xl p-6 border border-[#E6E2D8] shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between group">
+                    <div>
+                        <div class="bg-[#F3F0E6] rounded-xl overflow-hidden mb-6 h-72 flex items-center justify-center relative">
+                            <img src="./product-serum.jpg" alt="Restore & Renew Serum" class="w-full h-full object-cover rounded-xl transition-transform duration-500 ease-out group-hover:scale-105">
+                        </div>
+                        <span class="text-xs uppercase tracking-widest text-[#5A6B54] font-semibold">30 ml</span>
+                        <h3 class="serif-font text-2xl font-bold text-[#2D3729] mt-1">Restore & Renew</h3>
+                        <p class="text-xs uppercase tracking-wider text-[#6B7864] mb-3">Serum</p>
+                        <p class="text-sm text-[#5A6B54] mb-4">Targeted active repair for acne scars, pigmentation, and dullness.</p>
+                    </div>
+                    <div class="flex items-center justify-between pt-4 border-t border-[#E6E2D8]">
+                        <span class="serif-font text-2xl font-bold text-[#2D3729]">₹999</span>
+                        <button onclick="addToCart('Restore & Renew Serum', 999)" class="bg-[#3B4D35] text-white px-4 py-2 rounded-full text-xs uppercase tracking-widest hover:bg-[#2D3729] transition-all cursor-pointer">Add to Cart</button>
+                    </div>
+                </div>
+
+                <!-- Product 5 -->
+                <div class="bg-white rounded-2xl p-6 border border-[#E6E2D8] shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between group">
+                    <div>
+                        <div class="bg-[#F3F0E6] rounded-xl overflow-hidden mb-6 h-72 flex items-center justify-center relative">
+                            <img src="./product-sunscreen.jpg" alt="Protect & Shield SPF 30 Sunscreen" class="w-full h-full object-cover rounded-xl transition-transform duration-500 ease-out group-hover:scale-105">
+                        </div>
+                        <span class="text-xs uppercase tracking-widest text-[#5A6B54] font-semibold">50 g</span>
+                        <h3 class="serif-font text-2xl font-bold text-[#2D3729] mt-1">Protect & Shield</h3>
+                        <p class="text-xs uppercase tracking-wider text-[#6B7864] mb-3">SPF 30 Sunscreen</p>
+                        <p class="text-sm text-[#5A6B54] mb-4">Broad-spectrum mineral defense without white cast.</p>
+                    </div>
+                    <div class="flex items-center justify-between pt-4 border-t border-[#E6E2D8]">
+                        <span class="serif-font text-2xl font-bold text-[#2D3729]">₹699</span>
+                        <button onclick="addToCart('Protect & Shield Sunscreen', 699)" class="bg-[#3B4D35] text-white px-4 py-2 rounded-full text-xs uppercase tracking-widest hover:bg-[#2D3729] transition-all cursor-pointer">Add to Cart</button>
+                    </div>
+                </div>
+
+                <!-- Subscription Kit Promo Card -->
+                <div class="bg-[#3B4D35] text-white rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between relative overflow-hidden group">
+                    <div>
+                        <div class="rounded-xl overflow-hidden mb-6 h-72 flex items-center justify-center relative">
+                            <img src="./image.png" alt="Complete Clairo Collection" class="w-full h-full object-cover rounded-xl transition-transform duration-500 ease-out group-hover:scale-105">
+                            <div class="absolute top-3 left-3 bg-[#3B4D35]/90 backdrop-blur-sm text-white px-3 py-1 rounded-full text-[10px] uppercase tracking-widest font-semibold border border-white/20">Complete 5-Step System</div>
+                        </div>
+                        <span class="text-xs uppercase tracking-widest text-[#C2D1BC] font-semibold">Starter Offer</span>
+                        <h3 class="serif-font text-3xl font-bold mt-1 text-white">Trial Kit</h3>
+                        <p class="text-xs uppercase tracking-wider text-[#C2D1BC] mb-3">2-Week Personalized Routine</p>
+                        <p class="text-sm text-[#E2EBDC] mb-4">Take the 2-minute quiz and receive your complete custom regimen delivered to your door.</p>
+                    </div>
+                    <div class="flex items-center justify-between pt-4 border-t border-white/20 relative z-10">
+                        <div>
+                            <span class="text-xs text-[#C2D1BC] block">Special Price</span>
+                            <span class="serif-font text-3xl font-bold">₹299</span>
+                        </div>
+                        <button onclick="addToCart('Clairo Trial Kit (2-Week)', 299)" class="bg-white text-[#2D3729] px-5 py-2.5 rounded-full text-xs uppercase tracking-widest font-bold hover:bg-[#FBF9F5] transition-all cursor-pointer">Get Trial Kit</button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 3. COMMUNITY PAGE -->
+        <section id="page-community" class="page-section py-16 px-6 max-w-4xl mx-auto">
+            <div class="text-center space-y-4 mb-16">
+                <span class="text-xs uppercase tracking-[0.3em] text-[#5A6B54] font-semibold">Our Manifesto</span>
+                <h2 class="serif-font text-4xl md:text-6xl font-bold text-[#2D3729]">Two people can share a bathroom shelf. <br>They'll never share a skin.</h2>
+                <div class="w-16 h-[2px] bg-[#3B4D35] mx-auto mt-6"></div>
+            </div>
+
+            <div class="bg-white p-8 md:p-14 rounded-3xl border border-[#E6E2D8] shadow-sm space-y-8 text-[#4A5543] leading-relaxed text-lg serif-font">
+                <p class="first-letter:text-5xl first-letter:font-bold first-letter:mr-3 first-letter:float-left first-letter:text-[#3B4D35]">
+                    For too long, the beauty industry has treated skin like a generalized category—selling standard concoctions off crowded retail shelves that force you to guess, test, and fail 4 or 5 different brands before finding relief.
+                </p>
+                <p>
+                    We built <strong>Clairo</strong> around one fundamental truth: your skin isn't generic. It responds uniquely to the stress of your daily routine, the specific humidity of your city, and even the mineral content of your local water supply. 
+                </p>
+                <p>
+                    That is why we created <strong>#NotYourSkinTwin</strong>. We reject before-and-after shame, one-size-fits-all formulas, and confusing shelf-stacking. Instead, we offer an intelligent subscription model that evolves month-by-month alongside you.
+                </p>
+                <div class="pt-6 border-t border-[#E6E2D8] flex flex-col sm:flex-row items-center justify-between text-base font-sans not-italic">
+                    <div>
+                        <p class="font-bold text-[#2D3729]">Treat. Heal. Glow Naturally.</p>
+                        <p class="text-xs text-[#5A6B54] uppercase tracking-widest mt-1">Join the Clairo Movement</p>
+                    </div>
+                    <button onclick="switchPage('products')" class="mt-4 sm:mt-0 bg-[#3B4D35] text-white px-6 py-3 rounded-full text-xs uppercase tracking-widest font-semibold hover:bg-[#2D3729] transition-all cursor-pointer">
+                        Take the 2-Minute Quiz
+                    </button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-[#2D3729] text-[#F3F0E6] py-12 px-6 mt-20">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
+            <div>
+                <span class="serif-font text-2xl font-bold tracking-wider text-white">Clairo Skincare</span>
+                <p class="text-xs text-[#A3B29C] uppercase tracking-widest mt-1">Treat. Heal. Glow Naturally. #NotYourSkinTwin</p>
+            </div>
+            <div class="text-xs text-[#A3B29C] space-y-1">
+                <p>clairoskincare.com | hello@clairoskincare.com</p>
+                <p>&copy; 2026 Clairo Skincare. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- CART NOTIFICATION TOAST -->
+    <div id="cart-toast" class="fixed bottom-6 right-6 bg-[#2D3729] text-white px-6 py-4 rounded-2xl shadow-2xl transform translate-y-32 opacity-0 transition-all duration-300 z-50 flex items-center space-x-4 border border-white/20">
+        <div class="bg-[#3B4D35] p-2 rounded-full">
+            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+        </div>
+        <div>
+            <p class="text-xs text-[#A3B29C] uppercase tracking-wider">Added to bag</p>
+            <p id="toast-item-name" class="text-sm font-semibold">Item added successfully</p>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT CONTROLS -->
+    <script>
+        function switchPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            // Remove active style from nav links
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+
+            // Show target page
+            document.getElementById('page-' + pageId).classList.add('active');
+            
+            // Highlight nav link if it exists
+            const navLink = document.getElementById('nav-' + pageId);
+            if (navLink) {
+                navLink.classList.add('active');
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function addToCart(itemName, price) {
+            const toast = document.getElementById('cart-toast');
+            const toastName = document.getElementById('toast-item-name');
+            
+            toastName.textContent = `${itemName} (₹${price}) added!`;
+            toast.classList.remove('translate-y-32', 'opacity-0');
+            
+            setTimeout(() => {
+                toast.classList.add('translate-y-32', 'opacity-0');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
