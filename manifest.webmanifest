@@ -1,0 +1,76 @@
+{
+  "id": "clairo-skincare-pwa",
+  "name": "Clairo Skincare | Not Your Skin Twin",
+  "short_name": "Clairo",
+  "description": "Treat. Heal. Glow Naturally. Personalised skincare subscription factoring in city-specific water hardness and humidity.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": [
+    "window-controls-overlay",
+    "standalone",
+    "minimal-ui"
+  ],
+  "background_color": "#FBF9F5",
+  "theme_color": "#2D3729",
+  "orientation": "portrait-primary",
+  "lang": "en",
+  "dir": "ltr",
+  "categories": [
+    "shopping",
+    "lifestyle",
+    "beauty",
+    "health"
+  ],
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "icons/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Shop Products",
+      "short_name": "Products",
+      "description": "Explore Clairo formulas and personalized routines",
+      "url": "./index.html#products",
+      "icons": [
+        {
+          "src": "icons/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Our Manifesto",
+      "short_name": "Community",
+      "description": "Read the Clairo Skin Twin Manifesto",
+      "url": "./index.html#community",
+      "icons": [
+        {
+          "src": "icons/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ]
+}

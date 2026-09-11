@@ -4,6 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clairo Skincare | Not Your Skin Twin</title>
+    
+    <!-- PWA & Mobile Meta Tags -->
+    <meta name="theme-color" content="#2D3729">
+    <meta name="color-scheme" content="light">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Clairo">
+    <meta name="application-name" content="Clairo">
+    <meta name="description" content="Personalised skincare subscription factoring in city-specific water hardness and humidity. Treat. Heal. Glow Naturally.">
+    
+    <!-- PWA Manifest & App Icons -->
+    <link rel="manifest" href="manifest.webmanifest">
+    <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+    <link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png">
+
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style>
@@ -30,6 +48,202 @@
             border-bottom: 2px solid #3B4D35;
             font-weight: 600;
         }
+
+        /* PWA Installation Button */
+        .pwa-install-btn {
+            display: none;
+            align-items: center;
+            gap: 6px;
+            padding: 7px 16px;
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            font-weight: 600;
+            background: #F3F0E6;
+            color: #2D3729;
+            border: 1px solid #D9D3C5;
+            border-radius: 9999px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .pwa-install-btn:hover {
+            background: #2D3729;
+            color: #FBF9F5;
+            border-color: #2D3729;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(45, 55, 41, 0.15);
+        }
+
+        .pwa-install-btn svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        /* PWA Status Toast */
+        .pwa-status-toast {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background: #2D3729;
+            color: #FBF9F5;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-left: 4px solid #C5A880;
+            padding: 12px 20px;
+            font-size: 0.85rem;
+            letter-spacing: 0.03em;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 12px 30px rgba(32, 42, 30, 0.4);
+            border-radius: 12px;
+            transform: translateY(140%);
+            opacity: 0;
+            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease;
+            backdrop-filter: blur(8px);
+        }
+
+        .pwa-status-toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .pwa-status-toast.offline {
+            border-left-color: #F59E0B;
+        }
+
+        .pwa-status-toast.online {
+            border-left-color: #10B981;
+        }
+
+        .pwa-status-toast.success {
+            border-left-color: #8BA882;
+        }
+
+        /* iOS Install Instructions Sheet */
+        .ios-sheet-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(32, 42, 30, 0.6);
+            backdrop-filter: blur(6px);
+            z-index: 999;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .ios-sheet-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .ios-sheet-content {
+            background: #FBF9F5;
+            border: 1px solid #E6E2D8;
+            border-bottom: none;
+            border-radius: 24px 24px 0 0;
+            width: 100%;
+            max-width: 480px;
+            padding: 28px 24px 36px;
+            transform: translateY(100%);
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            color: #2D3729;
+            box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .ios-sheet-overlay.active .ios-sheet-content {
+            transform: translateY(0);
+        }
+
+        .ios-sheet-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 20px;
+        }
+
+        .ios-sheet-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 14px;
+            border: 1px solid #E6E2D8;
+            object-fit: cover;
+        }
+
+        .ios-sheet-header h3 {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: #2D3729;
+            margin-bottom: 2px;
+        }
+
+        .ios-sheet-header p {
+            font-size: 0.8rem;
+            color: #5A6B54;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .ios-close-btn {
+            margin-left: auto;
+            background: none;
+            border: none;
+            color: #5A6B54;
+            font-size: 1.6rem;
+            cursor: pointer;
+            line-height: 1;
+            padding: 4px;
+        }
+
+        .ios-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            background: #F3F0E6;
+            padding: 16px;
+            border-radius: 16px;
+            border: 1px solid #E6E2D8;
+        }
+
+        .ios-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: 0.9rem;
+            line-height: 1.4;
+            color: #2D3729;
+        }
+
+        .step-num {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: #2D3729;
+            color: #FBF9F5;
+            font-size: 0.75rem;
+            font-weight: 600;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        @media (max-width: 640px) {
+            .pwa-status-toast {
+                left: 16px;
+                right: 16px;
+                bottom: 16px;
+                justify-content: center;
+            }
+        }
     </style>
 </head>
 <body class="min-h-screen flex flex-col justify-between selection:bg-[#3B4D35] selection:text-white">
@@ -48,7 +262,11 @@
                 <button onclick="switchPage('community')" id="nav-community" class="nav-link pb-1 transition-all cursor-pointer">Community</button>
             </nav>
 
-            <div class="flex items-center space-x-4">
+            <div class="flex items-center space-x-3">
+                <button id="pwa-install-btn" class="pwa-install-btn" aria-label="Install Clairo App">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                    <span>Install App</span>
+                </button>
                 <button onclick="switchPage('products')" class="bg-[#3B4D35] text-white px-5 py-2.5 rounded-full text-xs uppercase tracking-widest hover:bg-[#2D3729] transition-all shadow-sm">
                     Take Skin Quiz
                 </button>
@@ -321,6 +539,34 @@
         </div>
     </div>
 
+    <!-- PWA Status Toast for Online/Offline Notifications -->
+    <div id="pwa-status-toast" class="pwa-status-toast" role="status" aria-live="polite"></div>
+
+    <!-- iOS Safari Install Instructions Sheet -->
+    <div id="ios-install-sheet" class="ios-sheet-overlay" onclick="closeIosSheet(event)">
+        <div class="ios-sheet-content" onclick="event.stopPropagation()">
+            <div class="ios-sheet-header">
+                <img src="icons/apple-touch-icon.png" alt="Clairo App Icon" class="ios-sheet-icon">
+                <div>
+                    <h3>Install Clairo</h3>
+                    <p>Offline routine & quick access</p>
+                </div>
+                <button class="ios-close-btn" onclick="closeIosSheet()" aria-label="Close">&times;</button>
+            </div>
+            <div class="ios-steps">
+                <div class="ios-step">
+                    <span class="step-num">1</span>
+                    <p>Tap the <strong>Share</strong> button <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: middle; display: inline-block; margin: 0 3px;"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="15" x2="12" y2="3"/></svg> in Safari's bottom toolbar.</p>
+                </div>
+                <div class="ios-step">
+                    <span class="step-num">2</span>
+                    <p>Scroll down and tap <strong>Add to Home Screen</strong> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: middle; display: inline-block; margin: 0 3px;"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>.</p>
+                </div>
+            </div>
+            <button class="w-full mt-6 bg-[#3B4D35] text-white py-3.5 rounded-full text-xs uppercase tracking-widest font-semibold hover:bg-[#2D3729] transition-all shadow-md" onclick="closeIosSheet()">Got It</button>
+        </div>
+    </div>
+
     <!-- JAVASCRIPT CONTROLS -->
     <script>
         function switchPage(pageId) {
@@ -334,7 +580,10 @@
             });
 
             // Show target page
-            document.getElementById('page-' + pageId).classList.add('active');
+            const targetSection = document.getElementById('page-' + pageId);
+            if (targetSection) {
+                targetSection.classList.add('active');
+            }
             
             // Highlight nav link if it exists
             const navLink = document.getElementById('nav-' + pageId);
@@ -343,7 +592,26 @@
             }
 
             window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            if (window.location.hash !== '#' + pageId) {
+                history.replaceState(null, null, '#' + pageId);
+            }
         }
+
+        // Initialize view based on URL hash (e.g. from PWA shortcuts)
+        window.addEventListener('DOMContentLoaded', () => {
+            const hash = window.location.hash.replace('#', '');
+            if (hash && document.getElementById('page-' + hash)) {
+                switchPage(hash);
+            }
+        });
+
+        window.addEventListener('hashchange', () => {
+            const hash = window.location.hash.replace('#', '');
+            if (hash && document.getElementById('page-' + hash)) {
+                switchPage(hash);
+            }
+        });
 
         function addToCart(itemName, price) {
             const toast = document.getElementById('cart-toast');
@@ -356,6 +624,100 @@
                 toast.classList.add('translate-y-32', 'opacity-0');
             }, 3000);
         }
+
+        // PWA Status Toast Helper
+        function showStatusToast(message, type = 'info', duration = 3500) {
+            const toast = document.getElementById('pwa-status-toast');
+            if (!toast) return;
+            toast.textContent = message;
+            toast.className = `pwa-status-toast ${type} show`;
+            clearTimeout(toast._timer);
+            if (duration > 0) {
+                toast._timer = setTimeout(() => {
+                    toast.classList.remove('show');
+                }, duration);
+            }
+        }
+
+        // Network Status Observers
+        window.addEventListener('offline', () => {
+            showStatusToast('⚡ OFFLINE MODE — Viewing cached routine', 'offline', 0);
+        });
+
+        window.addEventListener('online', () => {
+            showStatusToast('✓ BACK ONLINE — Live catalog synced', 'online', 3000);
+        });
+
+        if (!navigator.onLine) {
+            showStatusToast('⚡ OFFLINE MODE — Viewing cached routine', 'offline', 0);
+        }
+
+        // iOS Sheet Helpers
+        function closeIosSheet(e) {
+            if (e && e.target && e.target !== e.currentTarget && !e.target.classList.contains('ios-close-btn')) {
+                return;
+            }
+            const sheet = document.getElementById('ios-install-sheet');
+            if (sheet) sheet.classList.remove('active');
+        }
+
+        // Register Service Worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js')
+                    .then((reg) => {
+                        console.log('[PWA] Clairo Service Worker registered with scope:', reg.scope);
+                    })
+                    .catch((err) => {
+                        console.error('[PWA] Clairo Service Worker registration failed:', err);
+                    });
+            });
+        }
+
+        // PWA Installation Flow
+        let deferredPrompt = null;
+        const installBtn = document.getElementById('pwa-install-btn');
+        const isIos = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+        const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            if (installBtn && !isStandalone) {
+                installBtn.style.display = 'inline-flex';
+            }
+        });
+
+        if (installBtn) {
+            // Show button on iOS if not already installed as standalone
+            if (isIos && !isStandalone) {
+                installBtn.style.display = 'inline-flex';
+            }
+
+            installBtn.addEventListener('click', async () => {
+                if (deferredPrompt) {
+                    deferredPrompt.prompt();
+                    const { outcome } = await deferredPrompt.userChoice;
+                    if (outcome === 'accepted') {
+                        installBtn.style.display = 'none';
+                        showStatusToast('Clairo App installed!', 'success');
+                    }
+                    deferredPrompt = null;
+                } else if (isIos && !isStandalone) {
+                    const sheet = document.getElementById('ios-install-sheet');
+                    if (sheet) sheet.classList.add('active');
+                } else {
+                    // Fallback inform user app can be installed from browser menu
+                    showStatusToast('To install, open browser menu and tap "Install app" or "Add to Home screen"', 'info', 4500);
+                }
+            });
+        }
+
+        window.addEventListener('appinstalled', () => {
+            if (installBtn) installBtn.style.display = 'none';
+            deferredPrompt = null;
+            showStatusToast('Clairo installed to Home Screen!', 'success');
+        });
     </script>
 </body>
 </html>
